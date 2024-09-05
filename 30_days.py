@@ -4,6 +4,7 @@ import joblib
 import numpy as np
 import shap
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # 定义特征名称
 feature_names = [
