@@ -5,8 +5,6 @@ import numpy as np
 import shap
 import pandas as pd
 import matplotlib.pyplot as plt
-import lime
-import lime.lime_tabular
 
 # 定义特征名称
 feature_names = [
@@ -85,24 +83,3 @@ if st.button("Predict"):
     shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
     plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
     st.image("shap_force_plot.png")
-
-# 训练LIME解释器
-explainer = lime.lime_tabular.LimeTabularExplainer(
-    training_data=X_train.values, 
-    feature_names=feature_names, 
-    class_names=['Class 0', 'Class 1'], 
-    mode='classification'
-)
-
-# 选择要解释的实例
-exp = explainer.explain_instance(
-    data_row=pd.DataFrame([feature_values], columns=feature_names).values[0], 
-    predict_fn=model.predict_proba
-)
-
-# 显示解释结果并保存为图像
-exp.as_pyplot_figure()
-plt.savefig("lime_explanation_plot.png", bbox_inches='tight', dpi=1200)
-
-# 使用 Streamlit 显示图像
-st.image("lime_explanation_plot.png")
