@@ -13,7 +13,7 @@ feature_names = [
 ]
 
 # 加载保存的模型
-xgb_model = joblib.load('xgboost.pkl')  # 如果你使用的是.pkl文件
+model = joblib.load('xgboost.pkl')  # 如果你使用的是.pkl文件
 
 # Streamlit用户界面
 st.title("30 Days Mortality Prediction")
